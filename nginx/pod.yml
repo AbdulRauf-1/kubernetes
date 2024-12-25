@@ -1,11 +1,12 @@
-kind: Pod
-apiVersion: v1
-metadata:
-  name: nginx-pod
-  namespace: nginx
-spec:
-  containers:
-  - name: nginx
-    image: nginx:latest
-    ports:
-    - containerPort: 80
+kind: Pod # Defines the type of Kubernetes object
+apiVersion: v1 # Specifies the API version for the Pod object
+metadata: # Metadata about the Pod
+  name: nginx-pod # The name of the Pod
+  namespace: nginx # The namespace in which the Pod is created
+spec: # Specification of the Pod's desired state
+  containers: # List of containers within the Pod
+  - name: nginx # The name of the container
+    image: nginx:latest # The Docker image for the container
+    ports: 
+    - containerPort: 80 # The port that the container exposes
+    

@@ -1,20 +1,19 @@
-kind: Cluster
-apiVersion: kind.x-k8s.io/v1alpha4
-nodes:
-- role: control-plane
-  image: kindest/node:v1.31.2
-- role: worker
-  image: kindest/node:v1.31.2
-- role: worker
-  image: kindest/node:v1.31.2
-- role: worker
-  image: kindest/node:v1.31.2
+kind: Cluster # Specifies the kind of Kubernetes object, in this case, a Cluster
+apiVersion: kind.x-k8s.io/v1alpha4 # Specifies the API version of the kind object
+nodes: # List of nodes in the cluster
+- role: control-plane # Role of the node, control-plane manages the cluster
+  image: kindest/node:v1.31.2 # Docker image for the control-plane node
+- role: worker # Role of the node, worker runs the application workloads
+  image: kindest/node:v1.31.2 # Docker image for the worker node
+- role: worker # Role of the node, worker runs the application workloads
+  image: kindest/node:v1.31.2 # Docker image for the worker node
+- role: worker # Role of the node, worker runs the application workloads
+  image: kindest/node:v1.31.2 # Docker image for the worker node
 
-  extraPortMappings:
-  - containerPort: 80
-    hostPort: 8080
-    protocol: TCP
-  - containerPort: 443
-    hostPort: 8443
-    protocol: TCP
-    
+  extraPortMappings: # Additional port mappings for the node
+  - containerPort: 80 # Port inside the container
+    hostPort: 8080 # Port on the host machine
+    protocol: TCP # Protocol used for the port mapping
+  - containerPort: 443 # Port inside the container
+    hostPort: 8443 # Port on the host machine
+    protocol: TCP # Protocol used for the port mapping

@@ -1,0 +1,12 @@
+kind: PersistentVolumeClaim  # Specifies that this is a PersistentVolumeClaim resource
+apiVersion: v1  # API version being used for this resource
+metadata:
+  name: local-pvc  # Name of the PersistentVolumeClaim
+  namespace: nginx  # Namespace in which the PersistentVolumeClaim is created
+spec:
+  accessModes:
+    - ReadWriteOnce  # The volume can be mounted as read-write by a single node
+  resources:
+    requests:
+      storage: 1Gi  # The amount of storage requested
+  storageClassName: local-storage  # The name of the StorageClass required by the claim

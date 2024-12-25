@@ -1,42 +1,42 @@
-kind: CronJob
-apiVersion: batch/v1
+kind: CronJob # Specifies that this is a CronJob resource
+apiVersion: batch/v1 # API version for the CronJob resource
 metadata:
-  name: minute-backup
-  namespace: nginx
+  name: minute-backup # Name of the CronJob
+  namespace: nginx # Namespace in which the CronJob is created
 spec:
-  schedule: "* * * * *"
+  schedule: "* * * * *" # Cron schedule expression (runs every minute)
   jobTemplate:
     spec:
       template:
         metadata:
-          name: minute-backup
+          name: minute-backup # Name of the job template
           labels:
-            app: minute-backup
+            app: minute-backup # Label for the job template
         spec:
           containers:
-          - name: backup-container
-            image: busybox:latest
+          - name: backup-container # Name of the container
+            image: busybox:latest # Docker image to use for the container
             command: 
             - sh
             - -c
-            - >
-              echo "Backup Started";
-              mkdir -p /backups &&
-              mkdir -p /demo-data &&
-              cp -r /demo-data /backups &&
-              echo "Backup Completed";
+            - > 
+              echo "Backup Started"; 
+              mkdir -p /backups && 
+              mkdir -p /demo-data && 
+              cp -r /demo-data /backups && 
+              echo "Backup Completed"; 
             volumeMounts:
-            - name: data-volume
-              mountPath: /demo-data
-            - name: backup-volume
-              mountPath: /backups
-          restartPolicy: OnFailure
+            - name: data-volume # Name of the volume to mount
+              mountPath: /demo-data # Path to mount the volume inside the container
+            - name: backup-volume # Name of the volume to mount
+              mountPath: /backups # Path to mount the volume inside the container
+          restartPolicy: OnFailure # Restart policy for the job (on failure)
           volumes:
-            - name: data-volume
+            - name: data-volume # Name of the volume
               hostPath:
-                path: /demo-data
-                type: DirectoryOrCreate
-            - name: backup-volume
+                path: /demo-data # Path on the host to mount
+                type: DirectoryOrCreate # Create the directory if it doesn't exist
+            - name: backup-volume # Name of the volume
               hostPath:
-                path: /backups
-                type: DirectoryOrCreate
+                path: /backups # Path on the host to mount
+                type: DirectoryOrCreate # Create the directory if it doesn't exist

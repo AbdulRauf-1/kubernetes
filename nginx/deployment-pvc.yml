@@ -1,0 +1,28 @@
+kind: Deployment # Specifies that this is a Deployment resource
+apiVersion: apps/v1 # Specifies the API version
+metadata: # Metadata about the Deployment
+  name: nginx-deployment # Name of the Deployment
+  namespace: nginx # Namespace in which the Deployment is created
+spec: # Specification of the Deployment
+  replicas: 2 # Number of pod replicas
+  selector: # Selector to identify the pods
+    matchLabels: # Match labels for the selector
+      app: nginx # Label to match
+  template: # Template for the pods
+    metadata: # Metadata for the pods
+      name: nginx-dep-pod # Name of the pod template
+      labels: # Labels for the pods
+        app: nginx # Label for the pods
+    spec: # Specification of the pod
+      containers: # List of containers in the pod
+      - name: nginx # Name of the container
+        image: nginx:latest # Docker image for the container
+        ports: # List of ports to expose
+        - containerPort: 80 # Port to expose on the container
+        volumeMounts: # List of volume mounts
+        - mountPath: /var/www/html # Path to mount the volume
+          name: my-volume # Name of the volume to mount
+      volumes: # List of volumes
+      - name: my-volume # Name of the volume
+        persistentVolumeClaim: # Use a PersistentVolumeClaim
+          claimName: local-pvc # Name of the PersistentVolumeClaim

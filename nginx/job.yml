@@ -1,19 +1,19 @@
-kind: Job
-apiVersion: batch/v1
+kind: Job # Specifies the type of Kubernetes resource
+apiVersion: batch/v1 # Specifies the API version of the resource
 metadata:
-  name: demo-job
-  namespace: nginx
+  name: demo-job # Name of the Job
+  namespace: nginx # Namespace in which the Job is created
 spec:
-  completions: 1
-  parallelism: 1
+  completions: 1 # Number of successfully completed pods required to consider the Job complete
+  parallelism: 1 # Number of pods that can run in parallel
   template:
     metadata:
-      name: demo-job-pod
+      name: demo-job-pod # Name of the pod template
       labels:
-        app: batch-task
+        app: batch-task # Labels to identify the pod
     spec:
       containers:
-      - name: batch-container
-        image: busybox:latest
-        command: ["sh", "-c", "echo Hello Friends! && sleep 10"]
-      restartPolicy: Never
+      - name: batch-container # List of containers to run in the pod
+        image: busybox:latest # Docker image to use for the container
+        command: ["sh", "-c", "echo Hello Friends! && sleep 10"] # Command to run inside the container
+      restartPolicy: Never # Restart policy for all containers within the pod

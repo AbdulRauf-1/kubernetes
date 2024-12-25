@@ -1,0 +1,16 @@
+kind: PersistentVolume # Specifies the kind of Kubernetes object, which is a PersistentVolume
+apiVersion: v1 # Specifies the API version
+metadata:
+  name: local-pv # Name of the PersistentVolume
+  namespace: nginx # Namespace in which the PersistentVolume is created
+  labels:
+    app: local # Label to categorize the PersistentVolume
+spec:
+  capacity:
+    storage: 1Gi # Storage capacity of the PersistentVolume
+  accessModes:
+      - ReadWriteOnce # Access mode of the PersistentVolume
+  persistentVolumeReclaimPolicy: Retain # Reclaim policy for the PersistentVolume
+  storageClassName: local-storage # Storage class name for the PersistentVolume
+  hostPath:
+    path: /mnt/data # Path on the host where the data is stored
