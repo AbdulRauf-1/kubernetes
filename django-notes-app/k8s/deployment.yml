@@ -1,22 +1,22 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: apps/v1 # API version for the deployment
+kind: Deployment # Type of Kubernetes resource
 metadata:
-  name: notes-app-deployment
+  name: notes-app-deployment # Name of the deployment
   labels:
-    app: notes-app
-  namespace: nginx #notes-app
+    app: notes-app # Label for the deployment
+  namespace: nginx #notes-app # Namespace for the deployment
 spec:
-  replicas: 1
+  replicas: 1 # Number of pod replicas
   selector:
     matchLabels:
-      app: notes-app
+      app: notes-app # Label selector for the pods
   template:
     metadata:
       labels:
-        app: notes-app
+        app: notes-app # Label for the pod template
     spec:
       containers:
-      - name: notes-app
-        image: rauf89772/notes-app-k8s
+      - name: notes-app # Name of the container
+        image: rauf89772/notes-app-k8s # Docker image for the container
         ports:
-        - containerPort: 8000
+        - containerPort: 8000 # Port exposed by the container

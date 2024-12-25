@@ -1,12 +1,13 @@
-kind: Service
-apiVersion: v1
+kind: Service # Specifies the type of Kubernetes object
+apiVersion: v1 # API version used to create the object
 metadata:
-  name: notes-app-service
-  namespace: nginx
+  name: notes-app-service # Name of the service
+  namespace: nginx # Namespace in which the service is created
 spec:
   selector:
-    app: notes-app
+    app: notes-app # Label selector to identify the pods
   ports:
-    - protocol: TCP
-      port: 8000
-      targetPort: 8000
+    - protocol: TCP # Protocol used by the service
+      port: 8000 # Port exposed by the service
+      targetPort: 8000 # Port on the container to which the traffic is forwarded
+      

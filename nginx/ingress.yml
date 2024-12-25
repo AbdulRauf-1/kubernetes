@@ -1,52 +1,25 @@
-kind: Ingress
-apiVersion: networking.k8s.io/v1
+kind: Ingress # Specifies the kind of resource
+apiVersion: networking.k8s.io/v1 # API version for the Ingress resource
 metadata:
-  name: nginx-notes-ingress
-  namespace: nginx
+  name: nginx-notes-ingress # Name of the Ingress resource
+  namespace: nginx # Namespace where the Ingress resource is created
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/rewrite-target: / # Annotation to rewrite the target URL
 spec:
   rules:
   - http:
       paths:
-      - pathType: Prefix
-        path: /nginx
+      - pathType: Prefix # Type of path matching
+        path: /nginx # Path to match for the nginx service
         backend:
           service:
-            name: nginx-service
+            name: nginx-service # Name of the backend service
             port: 
-              number: 80
-      - pathType: Prefix
-        path: / #/app
+              number: 80 # Port number of the backend service
+      - pathType: Prefix # Type of path matching
+        path: / #/app # Path to match for the notes-app service
         backend:
           service:
-            name: notes-app-service
+            name: notes-app-service # Name of the backend service
             port:
-              number: 8000
-
-
-# apiVersion: networking.k8s.io/v1
-# kind: Ingress
-# metadata:
-#   name: nginx-notes-ingress
-#   namespace: nginx
-#   annotations:
-#     nginx.ingress.kubernetes.io/rewrite-target: /
-# spec:
-#   rules:
-#   - http:
-#       paths:
-#       - pathType: Prefix
-#         path: /nginx
-#         backend:
-#           service:
-#             name: nginx-service
-#             port: 
-#               number: 80
-#       - pathType: Prefix
-#         path: /
-#         backend:
-#           service:
-#             name: notes-app-service
-#             port: 
-#               number: 8000
+              number: 8000 # Port number of the backend service
