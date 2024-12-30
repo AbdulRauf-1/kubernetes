@@ -20,7 +20,7 @@ spec: # Specification of the Deployment
         ports: # List of ports to expose
         - containerPort: 80 # Port to expose on the container
         volumeMounts: # List of volume mounts
-        - mountPath: /user/share/nginx/html # Path to mount the volume
+        - mountPath: /usr/share/nginx/html # Path to mount the volume
           name: my-volume # Name of the volume to mount
       volumes: # List of volumes
       - name: my-volume # Name of the volume
