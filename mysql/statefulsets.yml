@@ -1,0 +1,47 @@
+kind: StatefulSet # Kind of the Kubernetes object
+apiVersion: apps/v1 # API version
+metadata:
+  name: mysql-statefulset # Name of the StatefulSet
+  namespace: mysql # Namespace where the StatefulSet will be created
+
+spec:
+  serviceName: mysql-service # Name of the service that governs this StatefulSet
+  replicas: 3 # Number of desired pods
+  selector: 
+    matchLabels:
+      app: mysql # Label selector for pods
+
+  template:
+    metadata:
+      labels:
+        app: mysql # Labels for the pods
+    spec:
+      containers:
+      - name: mysql # Name of the container
+        image: mysql:8.0 # Docker image for the container
+        ports:
+        - containerPort: 3306 # Port exposed by the container
+        env:
+        - name: MYSQL_ROOT_PASSWORD # Environment variable for MySQL root password
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret # Name of the secret
+              key: MYSQL_ROOT_PASSWORD # Key in the secret
+
+        - name: MYSQL_DATABASE # Environment variable for MySQL database name
+          valueFrom:
+            configMapKeyRef:
+              name: mysql-config-map # Name of the ConfigMap
+              key: MYSQL_DATABASE # Key in the ConfigMap
+
+        volumeMounts:
+        - name: mysql-data # Name of the volume mount
+          mountPath: /var/lib/mysql # Path to mount the volume in the container
+  volumeClaimTemplates:
+  - metadata:
+      name: mysql-data # Name of the PersistentVolumeClaim
+    spec: 
+      accessModes: [ "ReadWriteOnce" ] # Access mode for the volume
+      resources:
+        requests:
+          storage: 1Gi # Storage request for the volume
