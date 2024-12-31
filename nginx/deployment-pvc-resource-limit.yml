@@ -2,7 +2,7 @@ kind: Deployment # Specifies the kind of Kubernetes object
 apiVersion: apps/v1 # Specifies the API version
 metadata:
   name: nginx-deployment # Name of the deployment
-  namespace: nginx # Namespace in which the deployment is created
+  namespace: nginx # Namespace where the deployment will be created
 spec:
   replicas: 2 # Number of pod replicas
   selector:
@@ -19,6 +19,13 @@ spec:
         image: nginx:latest # Docker image to use for the container
         ports:
         - containerPort: 80 # Port to expose on the container
+        resources:
+          requests:
+            cpu: 100m # CPU request for the container
+            memory: 128Mi # Memory request for the container
+          limits:
+            cpu: 200m # CPU limit for the container
+            memory: 256Mi # Memory limit for the container
         volumeMounts:
         - mountPath: /usr/share/nginx/html # Path to mount the volume inside the container
           name: my-volume # Name of the volume to mount

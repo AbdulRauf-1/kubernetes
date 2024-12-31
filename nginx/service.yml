@@ -1,13 +1,13 @@
 kind: Service # Specifies the type of Kubernetes object
-apiVersion: v1 # Specifies the API version
-metadata: # Metadata about the object
+apiVersion: v1 # API version used to create the object
+metadata:
   name: nginx-service # Name of the service
   namespace: nginx # Namespace in which the service is created
-spec: # Specification of the service
-  selector: # Selector to identify the pods that the service targets
-    app: nginx # Label selector to match the pods with label app: nginx
-  ports: # List of ports that the service exposes
+spec:
+  selector:
+    app: nginx # Label selector to identify the pods
+  ports:
     - protocol: TCP # Protocol used by the service
-      port: 80 # Port on which the service is exposed
-      targetPort: 80 # Port on the pod to which the traffic is forwarded
-  type: ClusterIP # Type of the service (ClusterIP, NodePort, LoadBalancer, etc.)
+      port: 80 # Port exposed by the service
+      targetPort: 80 # Port on the container to which the traffic is forwarded
+  type: ClusterIP # Type of service (ClusterIP, NodePort, LoadBalancer, etc.)

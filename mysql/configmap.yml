@@ -1,8 +1,8 @@
-kind: ConfigMap
-apiVersion: v1
+kind: ConfigMap # Specifies the type of Kubernetes object
+apiVersion: v1 # Specifies the API version
 metadata:
-  name: mysql-config-map
-  namespace: mysql
+  name: mysql-config-map # Name of the ConfigMap
+  namespace: mysql # Namespace in which the ConfigMap is created
 
 data:
-  MYSQL_DATABASE: devops
+  MYSQL_DATABASE: devops # Key-value pair for the configuration data

@@ -1,16 +1,15 @@
-kind: Service
-apiVersion: v1
+kind: Service # Specifies the type of Kubernetes object
+apiVersion: v1 # Specifies the API version
 metadata:
-  name: mysql-service
-  namespace: mysql
+  name: mysql-service # Name of the service
+  namespace: mysql # Namespace in which the service is created
 
 spec:
-  clusterIP: None
+  clusterIP: None # Service will not get a cluster IP, used for headless services
   selector:
-    app: mysql
+    app: mysql # Selects the pods with the label app=mysql
   ports:
-  - name: mysql
-    protocol: TCP
-    port: 3306
-    targetPort: 3306
-    
+  - name: mysql # Name of the port
+    protocol: TCP # Protocol used by the port
+    port: 3306 # Port exposed by the service
+    targetPort: 3306 # Port on the pod that the service should forward traffic to

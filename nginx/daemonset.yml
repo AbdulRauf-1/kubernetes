@@ -1,20 +1,20 @@
-kind: DaemonSet
-apiVersion: apps/v1
+kind: DaemonSet # Specifies that this is a DaemonSet
+apiVersion: apps/v1 # API version to use for this object
 metadata:
-  name: nginx-daemonset
-  namespace: nginx
+  name: nginx-daemonset # Name of the DaemonSet
+  namespace: nginx # Namespace in which the DaemonSet is created
 spec:
   selector:
     matchLabels:
-      app: nginx
+      app: nginx # Label selector for pods
   template:
     metadata:
-      name: nginx-daemon-pod
+      name: nginx-daemon-pod # Name of the pod template
       labels:
-        app: nginx
+        app: nginx # Labels to apply to the pods
     spec:
       containers:
-      - name: nginx
-        image: nginx:latest
+      - name: nginx # Name of the container
+        image: nginx:latest # Docker image to use for the container
         ports:
-        - containerPort: 80
+        - containerPort: 80 # Port to expose on the container

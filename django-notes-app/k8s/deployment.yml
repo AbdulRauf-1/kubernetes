@@ -20,3 +20,13 @@ spec:
         image: rauf89772/notes-app-k8s # Docker image for the container
         ports:
         - containerPort: 8000 # Port exposed by the container
+        # livenessProbe:
+        #   httpGet:
+        #     path: / # Path to check for liveness
+        #     port: 8000 # Port to check for liveness
+        readinessProbe:
+          httpGet:
+            path: / # Path to check for readiness
+            port: 8000 # Port to check for readiness
+          initialDelaySeconds: 10 # Delay before the probe is initiated 
+          periodSeconds: 5 # How often to perform the probe
